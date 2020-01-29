@@ -11,6 +11,7 @@
             <td>Nom</td>
             <td>Prénom</td>
             <td>Bio</td>
+            <td>Compétences</td>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,11 @@
                 <td>{{$user->lastname}}</td>
                 <td>{{$user->firstname}}</td>
                 <td>{{$user->bio}}</td>
+                <td>
+                    @foreach($user->skills as $skill)
+                        {{$skill['name']}}
+                    @endforeach
+                </td>
             </tr>
             @endforeach
         </tbody>

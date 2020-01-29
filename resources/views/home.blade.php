@@ -15,6 +15,16 @@
                     @endif
 
                     You are logged in!
+
+                        <ul>
+                            <li>{{Auth::user()->id}}</li>
+                            <li>{{Auth::user()->lastname}}</li>
+                            <li>{{Auth::user()->firstname}}</li>
+                            <li>{{Auth::user()->bio}}</li>
+                                @foreach(Auth::user()->skills as $skill)
+                                    <li>{{$skill['name']}}</li>
+                                @endforeach
+                        </ul>
                 </div>
             </div>
         </div>
