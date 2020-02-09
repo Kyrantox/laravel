@@ -25,6 +25,7 @@
                                     <li>{{$skill['name']}}</li>
                                 @endforeach
                         </ul>
+                        <a class="btn btn-info" href="{{ route('skills.index')}}">Voir mes compétences</a>
                 </div>
             </div>
         </div>

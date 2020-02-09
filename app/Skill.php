@@ -13,4 +13,8 @@ class Skill extends Model
     {
         return $this->belongsToMany('App\User')->withPivot('level');
     }
+
+    protected $fillable = [
+        'name', 'description', 'logo'
+    ];
 }
