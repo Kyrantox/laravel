@@ -5,10 +5,12 @@ namespace App\Policies;
 use App\Skill;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class SkillPolicy
 {
     use HandlesAuthorization;
+
 
     /**
      * Determine whether the user can view any skills.
@@ -18,7 +20,10 @@ class SkillPolicy
      */
     public function viewAny(User $user)
     {
-        //
+//        On peut utiliser les gates precedemment definie
+//        return Gate::check('viewresource', $user);
+//        Ou on peut recoder directement ses propres regles, ce que l'on va faire
+        return Auth::check();
     }
 
     /**
@@ -30,7 +35,7 @@ class SkillPolicy
      */
     public function view(User $user, Skill $skill)
     {
-        //
+        return Auth::check();
     }
 
     /**
@@ -41,7 +46,7 @@ class SkillPolicy
      */
     public function create(User $user)
     {
-        //
+        return Auth::check() && (Auth::user()->isAdministrator());
     }
 
     /**
@@ -54,19 +59,20 @@ class SkillPolicy
     public function update(User $user, Skill $skill)
     {
         //
-        return $user->id === $skill->user_id
-            ? Response::allow()
-            : Response::deny('You do not own this post.');
+//        return $user->id === $skill->user_id
+//            ? Response::allow()
+//            : Response::deny('You do not own this post.');
+//
+//        $response = Gate::inspect('update', $skill);
+//
+//        if ($response->allowed()) {
+//            Gate::authorize('update', $skill);
+//            // The action is authorized...
+//        } else {
+//            echo $response->message();
+//        }
 
-        $response = Gate::inspect('update', $skill);
-
-        if ($response->allowed()) {
-            Gate::authorize('update', $skill);
-            // The action is authorized...
-        } else {
-            echo $response->message();
-        }
-
+        return Auth::check();
 
     }
 
@@ -104,12 +110,5 @@ class SkillPolicy
     public function forceDelete(User $user, Skill $skill)
     {
         //
-    }
-
-    public function before($user, $elevation)
-    {
-        if ($user->isSuperAdmin()) {
-            return true;
-        }
     }
 }

@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class SkillUserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Skill_user_::class, 'skill');
+    }
+
+
     /**
      * Display a listing of the resource.
      *

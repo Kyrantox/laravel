@@ -7,7 +7,7 @@
                 <h2>Skills</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('skills.create') }}"> Create New Skill</a>
+                <a class="btn btn-success" href="{{ route('skills.create') }}"> Ajouter un Skill</a>
             </div>
         </div>
     </div>
@@ -23,6 +23,7 @@
             <th>No</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Niveau</th>
             <th width="280px">Action</th>
         </tr>
         @foreach (Auth::user()->skills as $skill)
@@ -30,12 +31,13 @@
                 <td>{{ ++$i }}</td>
                 <td>{{ $skill->name }}</td>
                 <td>{{ $skill->description }}</td>
+                <td>{{ $skill->pivot['level']  }}</td>
                 <td>
-                    <form action="{{ route('skill_user.destroy',$skill->id) }}" method="POST">
+                    <form action="{{ route('skill_user.destroy',$skill->pivot['skill_id'], $skill->pivot['user_id']) }}" method="POST">
 
                         <a class="btn btn-info" href="{{ route('skills.show',$skill->id) }}">Show</a>
 
-                        <a class="btn btn-primary" href="{{ route('skill_user.edit',$skill) }}">Edit</a>
+                        <a class="btn btn-primary" href="{{ route('skills.edit',$skill) }}">Edit</a>
 
                         @csrf
                         @method('DELETE')

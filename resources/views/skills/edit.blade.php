@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('skill_user.update',$skill->id) }}" method="POST">
+    <form action="{{ route('skill_user.update',$skill->pivot['skill_id'], $skill->pivot['user_id']) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -31,7 +31,7 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Niveau :</strong>
-                    <input type="text" name="name" value="{{ $skill->level }}" class="form-control" placeholder="Name">
+                    <input type="text" name="name" value="{{ $skill->level}}" class="form-control" placeholder="Niveau">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
